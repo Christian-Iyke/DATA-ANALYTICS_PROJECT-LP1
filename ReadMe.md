@@ -102,16 +102,94 @@
 
 ## After loading the datasets, the following were done to help have a better understanding of the data:
 
-### 1) checking the datatypes with .datatype and .info() methods
+### 1) checking the datatypes with .dtype and .info() methods. Example: startup_2018.info() or .dtype
 
-### 2) Checking for missing values with .isna().sum() method
+### 2) Checking for missing values with .isna().sum() method. Example; startup_2018.isna().sum()
 
-### 3) Checking for duplicate values with .duplicated() method
+### 3) Checking for duplicate values with .duplicated() method. Example; startup_2018.duplicated()
 
-### 4) checking the shape of the dataset with .shape method
+### 4) checking the shape of the dataset with .shape method. Example; startup_2018.shape
 
-### 5) Checking the head and  tail of the data with .head() and .tail() methods
-
-
+### 5) Checking the head and  tail of the data with .head() and .tail() methods. Example; startup_2018.head() or .tail()
 
 
+
+# DATA PROCESSING
+
+### This involves manipulating the datasets to enable us draw insight and make dicisions. Here, all the null values were treated using simpleImputer and applying transformation which took care of both numerical values and the categorical values.
+
+### Also, duplicated rows were removed and every other anomalis were taken care off. The colums that the datatype were supposed to be int, float or objects were changed to their supposed datatypes.
+
+### Note: this is done on the individual datasets.
+
+### also, Columns which are not needed were removed.
+
+### at this point, all dataset cleaned is been saved and will be called up in the next stage of Analying and Visualising the data.
+
+
+# ANALYSING AND VISUALISING THE DATA.
+
+## At this stage, all the four datasets that have been cleaned were read and concatinated as one single data as shown below:
+
+### Combining the datasets as one dataset
+
+### new_data = pd.concat([cleaned_2018,cleaned_2019,cleaned_2020,cleaned_2021], ignore_index=True)
+
+### with this, we now have a single data that we can analyse.
+
+### from here, we recall or Analytical Questions and Hypothesis Statement and try to do justice to them.
+
+
+
+# HYPOTHESIS
+
+## HO (Null): Year of Funding is not dependent on the amount raised.¶
+## H1(Alternative): Year of Funding is dependent on the amount raised.
+
+
+# HYPOTHESIS TESTING
+
+## OUR SIGNIFICANCE LEVEL IS 5%
+
+## WE ARE USING T TEST
+
+## performing two sample t-test
+
+## yr = cleaned_new_data['Year of Funding']
+
+## amt = cleaned_new_data['Amount($)']
+
+## t,p = stats.ttest_ind(a=yr, b=amt) 
+
+## print(f't-value: {t}')
+## print(f'p-value: {p}')
+
+## Output: 
+## t-value: -1.9259817260698
+## p-value: 0.05415588405118259
+
+## Using this function, we were able to either accept or reject our result.
+
+### print("p-value for significance is: ", p)
+
+### if p<0.05:
+###        print("reject null hypothesis")
+### else:
+###        print("accept null hypothesis")
+
+### p-value for significance is:  0.05415588405118259
+### accept null hypothesis
+
+## So, from the above result, Since the p-value of the test (0.0541) is equal to or greater than .05, we accept the null hypothesis.
+
+## This means we have sufficient evidence to say that the Year of Funding is not dependant on the Amount raised.¶
+
+
+
+# ANALYTICAL QUESTIONS
+
+## 1) What is the total amount raised by all the investors
+## 2) Which sector has the highest amount invested.
+## 3) Which year has the most start up founded.¶
+## 4) Which Headquarters has the highest funding.
+## 5) Which Company has the highest amount invested.
